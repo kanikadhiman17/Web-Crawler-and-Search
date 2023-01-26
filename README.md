@@ -1,2 +1,2 @@
 # Web-Crawler-and-Search
-Meant for Homework 1 for the Advanced Internet Computing which involves implementing Web Search using Apache Lucene
+Repo made for Homework 1 for the Advanced Internet Computing, Spring 2023 at Georgia Tech. It involves implementing Web Search using Apache Lucene where the Web Pages are craweled and scraped using Jsoup.
