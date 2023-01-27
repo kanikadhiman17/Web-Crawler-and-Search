@@ -1,0 +1,113 @@
+Identity and Access Management Home Index Search Log In History Latest Changes External Web Users At GT, Passport.gatech.edu allows students and staff to sponsor guest accounts. In these cases the sponsor is responsible for the actions of these guests, and these accounts have access to various GT resources, such as VPN or LAWN. For more on this other type of guest, see also: http://iamweb1.iam.gatech.edu/docs/services/guests However, on the Internet, many sites allow lighter weight accounts that are given out freely, but have little ability to login or create issues. Such accounts are often self service, based on an email address, and little other information about the end user. Service Catalog Overview In Passport, a new web lightweight account service is being implemented. Access to use this service is not granted to users or applications default, and must be specifically requested, discussed and approved. Admins using this service may create multiple accounts that have little access to GT resources, and are based on little information about the end user of the account. Access to the service will be in the Guest tab of Passport, although strictly speaking these are not GT Guest accounts, but have less access than a true Guest account. In particular, these are not ‘sponsored’ accounts: Creators of these accounts are not held responsible for account holder actions. Accounts created with this service will be labelled as external-web-users. Who can use this service. Requesting to be added. Applications Application owners can request access to use ‘external web identities’, by using this link “How to request IAM services”. Access must be approved by Cybersec, and only the Mytest application is currently approved. In general you can request Identity and Access Mgt (IAM/IDM) services at Georgia Tech, by using this link “How to request IAM services”, which will gather your needs, submit a Footprints ticket for you, and begin any data stewardship or security overview that is needed. Account Delegates Passport users who have been granted the access to use the system will be able to create accounts with the group label “external-web-users”. This is similar to sponsoring a guest account, in that an account is created, and the end user is notified. However, unlike other Guest -account sponsors, the external-web-user account creator has less responsibility for the account holders actions. End Users End users will receive an email to the address used for account creation, and this initial email will have a link to set an initial password using special Passport.gatech.edu links. This process will seem very familiar to users of the Passport Guest system. End users are still expected to behave according to GT standards and policies. These users will not be required to use DUO two factor, but can optionally add it in Passport. Documentation End Users End users will be able to use Passport.gatech.edu for account maintenance, and this will be similar to the experience for other web accounts, where self service is allowed for account creation and maintenance. How to get an account To get an account, an account admin, with permissions in Passport, must create the account. This will be a similar process to Guest account setup in Passport today, so will look very familiar to passport admins. This account setup will be based on an email address given by the end user, and account setup information will then be emailed to that address. If the user is in control of that email address, they will be able to complete the account setup via self service, using a link in that email. I forgot my password On the login screen for passport.gatech.edu, if a user can not recall their password, they will be able to reset their password using their account name, and a password reset link will be emailed to their email address on file for that account. I forgot my username On the login screen for passport.gatech.edu, if a user can not recall their username, there is a link where they can enter their email address and the account name will be emailed to that address. I need to change my email address [future] Passport will allow changes to the email address used. In the meantime, it will be easier to create a new account, but tickets can be escalated to the IAM team for cases when the existing account needs a different email address. How to create/manage External Web Identities Passport The passport Guest management page looks like this. Selection of external-web-users as a group, creates a special kind of light weight account. Selecting the option to email the end user a password-setting link, is recommended, to free up the account creator from having to manage passwords. The Passport screen will look similar to this: If you select the special external-web-users group, and then Create
+
+You should see a screen like that below. 
+
+The next step is filling out name, email address, and this special group
+ That process will then generate a page like this, indicating successful account creation:
+ At this point, the end user will receive an email to the address that was used by the account creator, and will be directed on how to set the password. The account creator will also receive 
+an email confirmation.
+ Passport adding multiple guest accounts at once There is also a method to add many people at once. This works the same as adding one guest, except if you choose the “Create Multiple” button, you also get a place to cut/paste in the firstname,lastname,affiliation,emailaddress for each new guest. For performance reasons, we recommend limiting guest batches to 100 at at time.
+ An example might look like this: 
+This works the same as adding a single guest. Affiliation would commonly be guest, employee,
+or student.
+
+For external web guests like this, it makes sense to check to box to send the guest a 
+link for setting their password in Passport.gatech.edu. _This link expires after 7 days_.
+
+Common text recommended to add for the user, might look like this:
+
+This will be the account that you can use to access Georgia Techs Covid-19 testing 
+application https://mytest.gatech.edu. 
+
+Please click on the link above to set your password and then visit 
+https://mytest.gatech.edu 
+
+Make testing part of your weekly routine. Register at mytest.gatech.edu 
+
+For assistance, please contact the OIT Enterprise Service 
+Desk (https://techsupport.gatech.edu/) at 404-385-5555.
+ APIs behind the scenes - BuzzApi Behind the scenes APIs are called by Passport to do the work of creating accounts, setting passwords, sending emails, etc.  Flexibility and standards. Since the same APIs can be used for guests, by passport, 
+ IAT, etc. the system is expandable and standard everywhere. For example, IAT.gatech.edu 
+ users can see/use these apis from the Buzzapi tab. That looks like the following
+ These apis are only available to GT integrators, after special permissions, but may
+give some insight into how this works internally. 
+ How to report on External Web Identities These lightweight identities are loaded into the central person repository at Ga Tech (GTED) and are labeled with this attribute:     eduPersonScopedAffiliation: guest@guestgroup external-web-users
+ Like GT Guest accounts, these lightweight accounts do not have GTIDs but instead have a unique identifier called a gtPersonDirectoryId like all GT identities. Both the gtPersonDirectoryId values and the guest usernames can be seen in GTED’s LDAP or SQL/DWPROD representations. So that can be used to join or put these 2 types of accts into one list. Here is way to query GTED LDAP using an ldapsearch type of tool: [root@ducos mage]# queryGTED-globalpeople “edupersonscopedaffiliation=guest@guestgroup external-web-users” gtpersondirectoryid givenname sn mail gtprimarygtaccountusername dn: gtDirGUID=E1573EECFEF7EC3D83D229EE88385A04,ou=people,dc=gted,dc=gatech,dc=edu gtpersondirectoryid: E1573EECFEF7EC3D83D229EE88385A04 givenname: web sn: test mail: here.is.john@gmail.com gtprimarygtaccountusername: wtest8 dn: gtDirGUID=81DF40AD8A320749C061C8F558F3CA29,ou=people,dc=gted,dc=gatech,dc=edu gtpersondirectoryid: 81DF40AD8A320749C061C8F558F3CA29 givenname: Never sn: Winter mail: jeff.clough@oit.gatech.edu gtprimarygtaccountusername: nwinter30 GTED Accounts will be labeled in GTED and will have mail, gtdirguid identifier, and will be owned by a George Burdell/Confidential person: $ queryGTED-accounts uid=wtest7 uid displayname mail gtGuestIdentitySponsor gtDirGUID  edupersonscopedaffiliation
+dn: gtDirGUID=88036F4F1A87579F5AE38ABD0FA45B47,ou=Accounts,ou=gtaccounts,ou=departments,dc=gted,dc=gatech,dc=edu
+uid: wtest7
+displayname: Web Test2
+mail: web-test2@b.sproing.net
+gtGuestIdentitySponsor: gtDirGUID=47A17F89E0272A5849ECA7D094A8EC3E,ou=people,dc=gted,dc=gatech,dc=edu
+gtDirGUID: 88036F4F1A87579F5AE38ABD0FA45B47
+edupersonscopedaffiliation: guest@gt
+edupersonscopedaffiliation: member@gtaccounts
+edupersonscopedaffiliation: member@gt
+edupersonscopedaffiliation: guest@guestgroup external-web-users.  <<<<<<<<
+ DWPROD Accounts from GTED are synched into the datawarehouse into tables documented here: http://iamweb1.iam.gatech.edu/docs/services/GTED%20Datawarehouse%20Tables They can be queried with a sql tool, like this: [root@ducos mage]# gtsql-csv -colnames --system data_warehouse -q "select gtpersondirectoryid, givenname, sn, mail, gtprimarygtaccountusername from gted_people_scoped_affiliation join people3 on (gtpersondirectoryid=person_directory_id) where scoped_affiliation='guest@guestgroup external-web-users'"
+GTPERSONDIRECTORYID|GIVENNAME|SN|MAIL|GTPRIMARYGTACCOUNTUSERNAME
+6B02E893556FF3360F0218697AC4AEB8|web|test|here.is.john@gmail.com|wtest9
+81DF40AD8A320749C061C8F558F3CA29|Never|Winter|jeff.clough@oit.gatech.edu|nwinter30
+E1573EECFEF7EC3D83D229EE88385A04|web|test|here.is.john@gmail.com|wtest8 Technical Details Technical Overview From a programmer’s view, this system uses existing UI, code, and APIs for the Passport Guest account system. However, the new and very limited web accounts produced by these system can also be viewed as an entirely different service with different goals and needs than the existing Guest system. Accounts are issued without as much knowledge of the account user, and these issuers are not as accountable as a guest sponsor would be. Accounts are created in a similar way as any account using account creation APIs that talk to Mage, and are stored in the MAGE database. They are targeted by ETL processes to add attributes (or not). And they are stored in GTED, with special labels. In many ways they look like a guest account to GT programmers. These accounts are intentionally very limited in what they can do by various technical mechanisms. They do not get propagated or provisioned like normal accounts and they have little access. For example, they can not be used to access OIT databases, and do not appear as normal accounts in GTAD or GTED. Web use of these accounts is limited to specific CAS-integrated applications. Enabling a new application to use External Web Identities With CAS3, our current version of CAS, applications must have ‘+external-web-users’ in the name of the Registered Service. When such External Web Identities log into an application without this enabling name substring, the following error will appear: Not Authorized to Use GT Login and “The application you attempted to authenticate to is not authorized to use GT Login or you are not authorized to access the application.” Enabling new Passport admins for these External Web Identities In passport, some users can administer these new guest type “Web Identities”. IAT can be used to make someone an admin, using the API called central.iam.guests.groups.delegations Here is an example: Note that the owner_gtid is a ‘burdell’ user, and this field will always be 900012540. The group id will always be 5198, for the external-web-users group. What will Guest Users get in Email? When a guest is set up in Passport by an admin, they will receive an email with some guidance. This email will have a link to set up their password (using Passport). The email will look something like this: GT guest account created
+Passport <support@oit.gatech.edu>	Mon, Sep 21, 2020 at 1:45 PM
+To: here.is.john@gmail.com
+
+
+john smith,
+
+
+John Bryson has created a guest account for you on the on the Passport website with t
+he following services enabled:
+
+Basic Authentication
+
+
+Your guest account's GT username is: jsmith36
+
+
+To set your account password, follow this link or copy it into your browser's 
+address bar:
+
+
+https://passport.gatech.edu/confirm/guest_password/VWRAdemSPXqmJ9GugoUnQNfik0z5
+
+
+To reset your password or change your account email address, please visit the Passport 
+site at:
+
+
+https://passport.gatech.edu
+
+
+You are responsible for the appropriate use of the Guest GT Account and for adhering 
+to the GT Cyber Security Policies 
+(viewable at https://policylibrary.gatech.edu/information-technology). Your Guest GT 
+Account may not be shared with or transferred to another person.
+
+
+A message from John Bryson:
+
+
+This will be the account that you can use to access Georgia Techs Covid-19 testing 
+application https://mytest.gatech.edu.
+
+
+Please click on the link above to set your password and then visit 
+https://mytest.gatech.edu
+
+
+Make testing part of your weekly routine. Register at mytest.gatech.edu 
+#JacketsProtectJackets
+
+
+For assistance, please contact the OIT Enterprise Service Desk (https://techsupport.gatech.edu/) 
+at 404-385-5555.
+ Components involved * Mage 
+* Passport
+* BuzzApi
+* Mage-guest workflow (W06)
+* Access Control
+* GTAD Provisioner
+* CAS 
+* Kerberos (password policy) 
+* GTED Schema 
+ Limiting application access These accounts are not synched into GTAD, since they are not intended for everyday use at GT for access to normal services. They may or may not have a valid password in internal services as expected for normal accounts. They will not have the normal account labels like gtperson objectclass in LDAP, so they are hidden from many ldap enabled applications. They may not be visible to kerberos enabled applications. They will not have database access, and can not be turned into a globally authentication oracle database account. Application-access goal These limited accounts are not intended as general use accounts, so will not authenticate to many applications at GT. This is intentional, for security reasons, since there is little information known about the account holders at the time of issuance. GTAD: Not provisioning users to GTAD These limited accounts will not be provisioned to GTAD (or will provision in a reduced state). This will effectively prevent AD type authentications with these accounts. GTED: Only allowing authorized applications to see External Web Identities These limited accounts will be in GTED, but will have different definitions in ldap, and so will not be seen when searching from and LDAP authenticating application at GT. Kerberos Will provide password and or password policy controls as usual, or will intentionally reduce functionality of these limited accounts. They will not be in GTAD kerberos at all. CAS: Only allowing authorized applications These limited accounts will have some ability to use CAS SSO, only for certain approved applications. Such applications have ‘+external-web-users’ included in the ‘name’ of their registered service. Shib/SAML: External Web Identities cannot use GT’s SAML2 IDP These limited accounts will not have SSO ability using Shibboleth or SAML2. This is out of scope for these accounts. Mage: Will have records of these accounts, as it is authoritative for all GT accounts, but will not manage them. That will be done via APIs from Passport. Mage-guest workflow (W04/W06) is used to do ETL and certain account attributes, such as gtperson (or not) Last edited by John M Bryson, 2022-10-27 12:29:07 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

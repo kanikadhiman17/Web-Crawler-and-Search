@@ -1,0 +1,22 @@
+Identity and Access Management Home Index Search Log In History Latest Changes EUS or Oracle Enterprise User Security What is EUS EUS is an Oracle product, implemented at GT to allow Oracle databases to authenticate using GT usernames and passwords. This is integrated by synching GT accounts and passwors into the LDAP behind EUS called OID, when passwords are changed in Passport.gatech.edu. In that way, oracle logins can be integrated into our SSO solution at GT. The database accounts have to be marked in each oracle database as a ‘global’ account instead of a local account (which stores password hashes locally in each db) Since EUS is a standard off the shelf tool from Oracle, you can google and find lots of documentation on it. Ex. https://docs.oracle.com/cd/B28359_01/network.111/b28528/concepts.htm#DBIMI152 Who uses CAS? Centrally maintained Oracle databases maintained by OIT can use the service. Due to password hashing, this is restricted. Architecture For understanding how this fits into the GT infrastructure see the diagram below. Web application authentications, for applications that use central GT Accounts, can be compared to this chart to get a rough idea of the architecture, flow of information, and whether 2FA is employed. EUS architectural fit Where EUS fits into GT authentication architecture Powerpoint slide 2 here shows where EUS fits into GT architecture for authentication. Requesting this Service at GT This is an internal OIT service for security reasons. Runbook EUSRunbook Enable DEBUG mode Runbook in Word format EUSRunbook_editable Sanity checks before swapping servers oid1 and oid2 CHECK if users passwords same on both machines. . oidprod
+[root@iam-batch3 srv]# oidserver=oid-rich.gted.gatech.edu queryOID objectclass=orcluser uid pwdchangedtime
+[root@iam-batch3 srv]# oidserver=oid-bcdc.gted.gatech.edu queryOID objectclass=orcluser uid pwdchangedtime CHECK if registered dbs same on both machines. . oidprod
+[root@iam-batch3 srv]# env|grep oid
+oidserver=oid.gted.gatech.edu
+oiddb_password=xxxxx
+oidbinddn=cn=orcladmin
+oidport=636
+oiddb_username=ods
+oidprotocol=ldaps
+oidpassword=xxxx
+ 
+[root@iam-batch3 srv]# oidserver=oid-rich.gted.gatech.edu queryOID objectclass=orcluser uid pwdchangedtime |ldif2csv uid pwdchangedtime
+mma48,20190529050009z
+ccamron3,20180720022917z
+:               
+[root@iam-batch3 srv]# oidserver=oid-rich.gted.gatech.edu queryOID objectclass=orcluser uid pwdchangedtime |ldif2csv uid pwdchangedtime > /tmp/user-pwdchangedtime.rich2
+[root@iam-batch3 srv]# oidserver=oid-bcdc.gted.gatech.edu queryOID objectclass=orcluser uid pwdchangedtime |ldif2csv uid pwdchangedtime > /tmp/user-pwdchangedtime.bcdc2
+Using ldaps://oid-bcdc.gted.gatech.edu:636
+ldap_sasl_bind(SIMPLE): Can't contact LDAP server (-1)
+[root@iam-batch3 srv]#
+ Keywords: EUS Oracle Enterprise User Security OID OUD EUSOID LDAP Replication Last edited by John Bryson, 2021-04-12 14:21:20 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

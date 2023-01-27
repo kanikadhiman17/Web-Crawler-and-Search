@@ -1,0 +1,50 @@
+Identity and Access Management Home Index Search Log In History Latest Changes why does iam do various things Common Questions and Answers / FAQ Why is it so hard to get SSO set up for my application? IAM hears variations on this question, where campus wants to purchase and application or already has purchased it. Now they want to set the application up to allow GT employees or students to access it using their GT accounts. And the process seems difficult/complex. Why do I have to talk to vendors, or figure out SSO information for my new application? Why doesn’t IAM do this for me? There are a few reasons for this. All center around complexity, responsibility, policy, and manpower. 1.IAM has promised to get stewardship permissions before allowing applications to access
+GT data. We have also made assurances to cybersecurity and others to follow GT and USG
+policies. We attempt to make that easier for campus, but we do have to gather information
+from the application owners to do this.
+
+2.IAM doesn't know the purpose of the new application, who will be responsible in case it
+gets hacked, what users should be allowed to log in (just staff? Just students? just people
+in some department? Some combination of these?)etc, and has to gather this authorization
+information from people who know. We are seeing more precise authorization being more 
+important for security over time, so applications are encouraged no to ignore the 
+authorization step, as was possible in the past.
+
+3. Application complexity.Many modern applications can defer authentication and 
+authorization to an external service, such as our GT campus SSO system. However, 
+some applications can not. However, this adds complexity and sometimes questions for 
+the vendor. A smart purchaser would ask this question before purchase.
+
+4.Modern applications that need SAML2 or CAS protocol are more complex than putting usernames and
+passwords into an application. But you get several benefits from using this central SSO:
+
++user accounts are centrally controlled, if you are using GT accounts
++deprovisioning and deauthorizing former employee and former students can be automated
+for the service owner, providing more security with less work.
++application owners don't have to do as much account management
++applications never see the passwords, limiting the impact of a compromised system
+
+5.Manpower limitations in the OIT IAM team prevent us from learning the idiosyncracies
+of hundreds of GT applications and vendors. Ultimately the person buying the product and
+the service owner has some responsibilities in setup and maintenance, that the IAM team 
+can not absorb. For example, if an application gets GT data, then that service owner has
+a responsibility to protect that data. IAM can share the authentication and authorization 
+work, and data work, but can not own each new service. Why does IAM have so many protocol options for Authentication? IAM supports a few authentication protocols, including GTAD/Active Directory, GTED LDAP/ 389 Directory, CAS protocol, SAML2, SAML1 Why so many? The main reason is to make it easy for application owners to do the right thing, securely and without a lot of friction. Historically, these applications did not do external authentication at all, or didn’t do it with any standard protocol. Also application owners did not even ask what options were available before purchase, so in OIT, we began supporting lots of different protocols. We have cut these down where possible. For example, direct Kerberos auth is deprecated. Shibboleth is deprecated, though SAML2 is supported in CASv6. Why doesn’t IAM enforce authorization rules in central SSO? Historically GT has have a loose confederation of IT teams on campus with their own funding and systems and strategies. There has been a goal in OIT to build goods central services, to convince departments to use them when it makes sense. Also, older applications were not generally capable of deferring authentication to a separate system, although this is rarely the case now with enterprise applications. Central authentication has been the focus centrally, and authorizations have been encouraged for many years. The GRS tool and AD provide grouping and authorization tools but the application owners have had this responsibility for many years. There are projects to make central enforcement better and stronger to satisfy some audit issues and USG handbook requirements. Why does IAM do integrations? Shouldn’t that be some other team? The OIT IAM team evolved from the OIT system admin team, where the need to centrally authentication and integrate was first seen. The complexity grew over time. Integrations were needed for simple SSO, or simple data needs, but have grown in number and complexity over time. Also various OIT depts had needs for data to be produced/provisioned into applications, in a tightly coupled fashion, and these needs also grew over time and expanded to depts like GTRI, Library, GTPE, Buzzcard, etc. Why does IAM manage databases? This is mostly historical. Many IAM tools were developed when the IAM team was part of the OIT system admin teams, and were developed with tools and languages that team used in their daily work. When the IAM team was formed, many of those developers stayed in the OIT system admin team, and later retired or moved on. Also, there is no OIT team that supports these legacy databases as a service. That said, there has been progress moving databases to Amazon AWS cloud databases that require very little support. Also the database layer has largely been abstracted to an API layer, so software is less dependent on database understanding. For example: - Passport was developed in the  OIT system admin team with mysql and PHP.
+  It was moved to the cloud.
+
+- GTED LDAP was done in the OIT system admin team with 389 Directory/LDAP. 
+  IAM inherited it without FTE replacement, and it has not been moved to a cloud db.
+
+- MAGE (the legacy IAM system) was developed in the OIT system admin team with postgres
+  database and python programming language. This has been reduced but not totally replaced.
+
+- Oracles EUS central authentication system was added later for authentication to Oracle
+  databases for the OIT EIS team. And this uses Oracle as a database and an LDAP protocol.
+  This was recently replaced by another OIT system admin developed system based on RADIUS. 
+  So the process of inheriting services from the system admin team continues, but no 
+  headcount usually comes with those services.
+
+- IAT the newest IAM tool, uses APIs to bring together identity information from Banner (Oracle),
+  USG Peoplesoft based HR (Oracle), Passport (AWS postgres), MAGE (postgres), etc. hiding the
+  database complexity from the application software.
+ In attempts to consolidate this over time, as new systems were developed with modern tools, like Oracle, JAVA. However, there has been limited time spent to convert legacy systems to new languages or databases. New and fewer databases has been a goal, but little progress has been done, except when new systems were implemented, mainly due to manpower needs. Why does IAM have so few members, considering the importance of their role? The OIT IAM team evolved from the system admin team, where the need to centrally authentication and integrate was first seen. The complexity grew over time. Integrations were needed for simple SSO, or simple data needs, but have grown in number and complexity over time. Also various OIT depts had needs for data to be produced/provisioned into applications, in a tightly coupled fashion, and these needs also grew over time and expanded to depts like GTRI, Library, GTPE, Buzzcard, etc. Last edited by John M Bryson, 2022-04-28 10:47:05 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

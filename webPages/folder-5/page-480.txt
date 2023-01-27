@@ -1,0 +1,84 @@
+Identity and Access Management Home Index Search Log In History Latest Changes How to request IAM Services Requests for IAM service can now use various ServiceNow forms below. To use this page properly / easily :  1.You need to be using the campus VPN (for servicenow links to work)
+ 2.You need to be logged into something that uses SSO
+ 3.These links will allow you to create a service request ticket in Servicenow
+   and an IAM team member will triage them, and begin the process to get data
+   stewardship approval, mgt approval, and begin implementation.  NOTE: For faster support, please select the appropriate request form for your support issue.
+ ServiceNow forms for IAM: Request a meeting with the IAM team Request general services from the IAM team Self-Service portal for maintaining identity and account information (Passport) Submit an information technology related incident or inquiry Request a single sign-on integration with your campus application Guidance on which form to use (for faster service) for IAM services: SSO and Integration GTED data that is not part of an SSO integration GTAD (not the IAM team) Grouper GRS Delegated Admin (IAT and/or Wand) [DUO admin[(#duo-admin) Passport guests, web guests BuzzAPI v3 or v4 (Mulesoft) Two-Factor Radius (not recommended if SAML is possible for app) Kerberos (MIT kerberos is deprecated) Other Authentication Options Georgia Tech offers several ways to authenticate users (aka verify user credentials) because each application or developer has different integration options. However, the authentication options should not be considered completely equivalent due to security, end-user satisfaction, future audit/transparency requirements, and sustainability considerations. The following table specifies the preferred order for authentication choices, please select the first that your application supports: Order Auth mechanism Pluses/Minuses 1 (best) SAML2 +Single sign on, +includes two-factor, +apps get username and user data via one integration, +limits password exposure, +will continue to meet audit requirements, +work easily for SaaS/off-campus applications, +support users from other institutions, +strongest encryption, … 2 CAS +Single sign on, +includes two-factor, +limits password exposure, +will continue to meet audit requirements, +work easily for SaaS/off-campus applications, -applications must continue to meet encryption requirements, -Support could be limited past ~2024 [1] 3 SAML1 +Single sign on, +includes two-factor, +apps get username and user data via one integration, +limits password exposure, +will continue to meet audit requirements, +work easily for SaaS/off-campus applications, -applications must continue to meet encryption requirements, -less open-source support/consistency, -Support could be limited past ~2024 [1] 4 GTED +will help apps meet more audit requirements, -apps must integrate with Duo/two-factor themselves, -password exposure to applications, -more difficult and risky to use from SaaS/off-campus applications, -requires GTED-searcher account with annual password expirations, -applications must continue to meet encryption requirements 5 GTAD -applications must independently meet audit requirements [2], -apps must integrate with Duo/two-factor themselves, -password exposure to applications, -more difficult and risky to use from SaaS/off-campus applications, -applications must continue to meet encryption requirements 6 RADIUS +includes two-factor, -only supports two-factor-enabled users, -applications must independently meet audit requirements, -password exposure to applications 7 MIT Kerberos (aka Prism) +some sso support (TGTs), -deprecated, expected to be replaced by GTAD some day, -applications must independently meet audit requirements, -apps must integrate with Duo/two-factor themselves, -password exposure to applications 8 Local accounts -everything negative above and then some [2] [1] - CAS and SAML1 are supported by Georgia Tech’s current WebLogin system, but the commercial marketplace does not support them broadly. Therefore, you should be aware that GT could choose a WebLogin system that does not support CAS or SAML1. This would be a big project and would involve lots of communication and time. We list this possibility here to let you know using SAML2 is similar in abilities/benefits and doesn’t have this risk. [2] Central identity systems can not enforce USG password policies such as complexity, reuse, length, forced expirations, compatibility with downstream systems, etc. SSO and Integration: ServiceNow WebLogin Request Form At GT, SSO can be accomplished with CAS Protocol or SAML2 for authentication, using CAS v6. There are other articles in this wike with details: http://iamweb1.iam.gatech.edu/docs/services/CAS You should include this information in the request form: What is the name of your application? What can the application use for authentication (ex CAS Protocol, SAML2, SAML2, LDAP, Other) (Note that the order of preference/ease at GT is SAML2, CAS, LDAP, Other) Briefly describe your application, and its business purpose. Please include names of commercial or open-source products. Will it be hosted on GT campus or off-campus?: Who uses the application? ex. Students, staff, non-GT people, one dept only?… How do users access the application? (web browser, ldap, SQL, off campus or on campus…) Which of the application’s network traffic is encrypted? What information / data do you need? About whom do you need information? (If different than application-users described above. ex.students,employees,guests,retirees..) Do you need access to information about students who have requested FERPA confidentiality? If the answer is YES, please explain Why this is needed. See link below for what FERPA confidential means. http://www.registrar.gatech.edu/students/formlanding/confid.php Note: Saying yes here means greatly increased data-steward scrutiny What will this information be used for? Access End Date (How long do you need access to this data?) Describe any storage of this information within your system, including reasons, locations (hostnames, computer locations), technologies (flat files, logs, database), and retention times: What information will be shown to application users about themselves and about others? To what information do you already access, from what systems, and what data-steward approvals have you recently obtained? IF the application is SaaS and you have requested GT data for the app, then “Is there a contract with the vendor, with language to protect GT data?” GTED Data: Please include the following information in the request form: Do you need the data using SQL or LDAP tools? 
+
+ What information / data do you need?  
+
+(Please state, in layman terms/English, what type of data you are requesting, even if you 
+know the LDAP attribute names. For example, say Name info, Title, Dept, whether they are
+student/employee/alumni, what GTAD groups they belong to, what GRS roles they are in, etc. 
+You can also add the LDAP terminology if you like, and this is helpful, but first describing 
+the need in business terms will allow a better understanding of your needs for Cybersecurity, 
+Data Stewards, Identity Mgt, Mgt, and others.)
+
+About whom do you need information? (if different than application-users described above.   
+ex.students,employees,guests,retirees..)
+
+Do you need access to information about students who have requested FERPA confidentiality? 
+
+If the answer is YES, please explain Why this is needed. See link below for what 
+FERPA confidential means. 
+See: http://www.registrar.gatech.edu/students/formlanding/confid.php
+
+    Note: There are about 20 current students (as of May 09) that have 
+          requested confidentiality
+    Note: Saying yes here means greatly increased data-steward scrutiny
+
+What will this information be used for?
+
+Access End Date (How long do you need access to this data?)
+
+Describe any storage of this information within your system, including reasons, locations
+(hostnames, computer locations), technologies (flat files, logs, database), and retention 
+times:
+
+What information will be shown to application users about themselves and about others?
+
+To what information do you already access, from what systems, and what data-steward 
+approvals have you recently obtained?
+ Grouper: Use this form: https://gatech.service-now.com/technology?id=sc_cat_item&sys_id=c981906a1b712014a8622f4b234bcb83&sysparm_category=c34751bd1bb964d0a8622f4b234bcb92 GRS or roles.iam: This has changed (improved) significantly. See the Requesting Access to the GRS client section of our main GRS service page. The TL;DR of it is that shell access to roles.iam.gatech.edu is automatically created as a result of an account’s getting administrative access to its first GRS role or folder. That GRS access is managed by whoever owns the GRS role or folder in question (not IAM). Delegated Admin to IAT and/or Wand: Please see our Requesting Delegated IT Admin Access from IAM page for detailed information on what’s needed to request either read-only access in IAT or full administrative privileges in IAT and Wand. DUO admin: Use this form: https://gatech.service-now.com/technology?id=sc_cat_item&sys_id=c981906a1b712014a8622f4b234bcb83&sysparm_category=c34751bd1bb964d0a8622f4b234bcb92 You should include this information in the request form:
+
+   Employee Name, 
+   Level of access needed 
+   Business reason for access
+
+Note: DUO admin is rarely allowed, due to cyber need for minimizing these
+ Guest GT Accounts Creating/Managing Guest Accounts Guest accounts are created and managed via self-service in the Passport. Increasing Guest Limits The number of guests that can be simultaneously active is limited by the Sponsor’s roles at Georgia Tech. If you need an increase in those limits, please do the following: Submit an IAM Services Request form as follows: Check the xxx box. For Request Details, we need to know the following: Your name, account, and contact information Justification for the increase. For LAWN requests, this should include: a description of the event, a pointer to an event website (if one exists), the dates of the event, and the number of non-GT attendees you are expecting. Please plan ahead, there is typically a 1-2 day turnaround time on processing these requests.page] BuzzAPI: Use this form: https://gatech.service-now.com/technology?id=sc_cat_item&sys_id=c981906a1b712014a8622f4b234bcb83&sysparm_category=c34751bd1bb964d0a8622f4b234bcb92 You should include this information in the request form:
+
+What information / data do you need?  
+
+About whom do you need information? (if different than application-users described above. 
+ex.students,employees,guests,retirees..)
+
+Do you need access to information about students who have requested FERPA confidentiality? 
+
+If the answer is YES, please explain Why this is needed. See link below for what 
+FERPA confidential means. 
+See: http://www.registrar.gatech.edu/students/formlanding/confid.php
+
+      Note: There are about 20 current students (as of May 09) that have 
+            requested confidentiality
+      Note: Saying yes here means greatly increased data-steward scrutiny
+
+What will this information be used for?
+
+Access End Date (How long do you need access to this data?)
+
+Describe any storage of this information within your system, including reasons, locations
+ (hostnames, computer locations), technologies (flat files, logs, database), and retention 
+ times:
+
+What information will be shown to application users about themselves and about others?
+
+To what information do you already access, from what systems, and what data-steward 
+approvals have you recently obtained?
+ Two-Factor: Use this form: https://gatech.service-now.com/technology?id=sc_cat_item&sys_id=c981906a1b712014a8622f4b234bcb83&sysparm_category=c34751bd1bb964d0a8622f4b234bcb92 GT Radius Proxy: Note that for most applications SAML2/SAML or CAS protocol are preferred, and this mechanism one that is less preferred for various security and sustainability reasons. So, if your application can do SAML, we prefer that. Use this form: https://gatech.service-now.com/technology?id=sc_cat_item&sys_id=c981906a1b712014a8622f4b234bcb83&sysparm_category=c34751bd1bb964d0a8622f4b234bcb92 You should include this information in the request form:
+
+ What information / data do you need?  
+ Machine names that will be using this.
+ Who can sign on to those machines.
+ Other?
+ Other: Use this form: https://gatech.service-now.com/technology?id=sc_cat_item&sys_id=c981906a1b712014a8622f4b234bcb83&sysparm_category=c34751bd1bb964d0a8622f4b234bcb92 Service accounts: These are only done by dept CSRs. They are a special type of GT account that is owned and maintained by a GT employee but has privilege-separation from the person who owns it. This is sometimes called a Privileged Separated Account or PSA. See our Service Roles and What They Can Do for You article for more information. There’s a “Requesting a Service Role” section at the bottom of that article that’s helpful in understanding what information is needed to request a service role/account. Reference: Just for reference, here is an archive of the older submission form, with the various stewardship and implementation questions. This is mostly for the IAM team. http://iamweb1.iam.gatech.edu/docs/uploads/Identity-Management,-Access-Request-Form.pdf Last edited by Bert Bee-Lindgren, 2022-12-22 08:11:13 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

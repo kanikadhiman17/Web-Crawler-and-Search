@@ -1,0 +1,44 @@
+Identity and Access Management Home Index Search Log In History Latest Changes services/IAT IAT Versions IAT FAQs Runbook for IAT:       
+ssh user@docker02.iam.gatech.edu
+cd /srv
+. /srv/setenv     
+service docker stop 
+service docker start
+/srv/docker-server/docker-orchestrate
+
+If issues, do 
+docker ps
+and find the number for IAT prod, then view logs like this:
+
+ [root@docker02 srv]# docker ps|grep iat
+7cafd857fe80   516434977536.dkr.ecr.us-east-1.amazonaws.com/iam-admin:master-94                    "/sbin/my_init"          36 minutes ago   Up 36 minutes                  0.0.0.0:8180->9292/tcp, :::8180->9292/tcp                   iat-prod
+a321f426fd78   516434977536.dkr.ecr.us-east-1.amazonaws.com/iam-admin:development-latest           "/sbin/my_init"          36 minutes ago   Up 36 minutes                  0.0.0.0:8080->9292/tcp, :::8080->9292/tcp                   iat-test
+  
+[root@docker02 srv]# docker logs 7cafd857fe80|less
+
+
+ Known Errors: Problem: iptables may be blocking it iptables –list –line-numbers | grep ‘block subnet’632 Solution: You might see something like this [root@r7 bryson]# iptables --list --line-numbers | grep 'block subnet'
+14   droplog4   tcp  --  130.207.183.0/26     anywhere             /* 4000 block subnet */
+15   droplog4   udp  --  130.207.183.0/26     anywhere             /* 4001 block subnet */
+[root@r7 bryson]#   iptables -D INPUT 14
+ Problem:        First screen after login shows this, if the service iat_buzzapi_trusted is expired.
+
+       Error
+       There was an error looking up your account information. Reload the page to try again.
+
+       Logs:  /srv/logs/iat-prod-httpd-logs
+
+       This is what IAT could log from… 
+       2017-07-07 08:29:37.869:INFO:oejshC.root:qtp874088044-19: I, [2017-07-07T08:29:37.
+       869427 #3275]  INFO -- : ERROR - There was an error looking up your account 
+       information (mwbert)BuzzAPI params: {“api_app_id”=>“iat_buzzapi_trusted”, 
+       “api_app_password”=>“*****“, “api_request_mode”=>“sync”, “api_log_level”=>“warn”, 
+       “resource”=>“api.applications”, “name”=>“mwbert”, “api_receive_timeout”=>60000}||
+       {“message”=>“Bad application identifier or password”, 
+       “result_code”=>“ERROR_AUTHENTICATION”, “type”=>“edu.gatech.api.BuzzApiException”}
+       |[“I: 08:29:37 :|cip=130.207.165.38 (via 130.207.172.146:5471)|: Request being 
+       processed by: buzzapi-httpd@api2.gatech.edu[7882]-1499332567", “E: 08:29:37 
+       :|cip=130.207.165.38 (via 130.207.172.146:5471)|r=api.applications|: Username 
+       iat_buzzapi_trusted or Password is wrong”, “E: 08:29:37 :|cip=130.207.165.38 (via 
+       ...: Bad application identifier or password “]|
+ Last edited by John M Bryson, 2021-07-20 02:19:01 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

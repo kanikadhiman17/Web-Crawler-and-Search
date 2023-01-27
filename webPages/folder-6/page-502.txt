@@ -1,0 +1,19 @@
+Identity and Access Management Home Index Search Log In History Latest Changes services/newHCM Overview for the new oneUSG HCM to GT IAM System: The system gets new employee information from the new oneUSG HCM system Then it either generates a GTID, or matches the new employee against an existing GTID. Note: later there was a GTRI pilot (in Aug2020) for GTRI HR initiators only, that added a manual servicenow early-onboarding ability to this system. However, the system described herein is currently the employee onboarding for campus (as of Mar 2021). More on that enhanced system can be found here: http://iamweb1.iam.gatech.edu/docs/services/newGTID Architecture The system has a few components. It reads from oneUSG HCM, looking for new employee or future employee records for Georgia Tech. It processes new employee records and either -creates a GTID -matches them to an existing employee GTID -sends fuzzy matches to Buzzcard center for manual resolution (create GTID or match one) Here are the internals of the GT processing. The common flow is this: New employee record appears in HCM and is seen by GT IAM
+This record has an emplid assigned by oneUSG, or previous employment at a USG institute
+This record has data that can be used to match GT records to see if they are returning
+or new.
+If new, they are given a new GTID in Banner (which is the repo for GTIDs)
+If returning, their HCM record with emplid is attached to their preexisting GTID.
+If it can not be determined for certain, the record goes to Buzzcard ctr for manual
+resolution.
+When the emplid is matched to a GTID, then they need a GT account.
+If the GTID has an attached GT account (say for cases, where they are a returning employee,
+or a student who is being hired) then they can begin using that account.
+If the GTID does not have a GT account, then one will be automatically created, because
+all employees are entitled to an account.
+Downstream actions may then be triggered, where some services are granted to the GT account. 
+This is typically done by service owners, using grouping and authorization systems, such
+as GRS, Grouper, GTAD, GTED.
+Data for all of the above is stored in GTED, and some data like GTID is sent back to 
+the oneUSG HCM system.
+ More information More details about the Mar 2020 integration can be found here http://iamweb1.iam.gatech.edu/docs/services/GTED/employee-information Often people want to know what are the steps leading up to this process. What happens before the employee is known to GT IT systems? You can read more on that here: http://iamweb1.iam.gatech.edu/docs/services/datafeeds/pre-hcm-process Last edited by John M Bryson, 2021-03-16 17:43:55 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

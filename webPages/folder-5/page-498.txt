@@ -1,0 +1,16 @@
+Identity and Access Management Home Index Search Log In History Latest Changes services/Shelldap Sheldap Georgia Tech’s Shelldap service is an LDAP wrapper around our Whitepages LDAP service. This wrapper greatly simplifies doing a simple search for someone by name, email address, account name, or even phone number. In short, you don’t have to say what type of search you’re doing. Just specify “cn=" when you want to look someone up. Here’s what you need to know: Host ldap.gatech.edu Search base dc=gatech,dc=edu Example: Using ldapsearch, a common LDAP command available on Linux systems, find someone named “Frank Pozner”. $ ldapsearch -xLLLH ldap://ldap.gatech.edu -b dc=gatech,dc=edu 'cn=frank pozner'
+dn: mageRole=81936,dc=gatech,dc=edu
+building: William C Wardlaw Center
+cn: Pozner,Franklin J
+displayName: Frnaklin J Pozner
+employeeType: employee
+homePostalAddress: UNPUBLISHED INFO
+mail: frank.pozner@gatech.edu
+objectClass: luPerson
+ou: Development-Vice President
+postalAddress: 0185
+primaryUid: lpozner3
+telephoneNumber: 404-385-1980
+title: Lecturer
+uid: lpozner3
+uid: frank-the-guy The great thing about using Shelldap rather than going directly to Whitepages is that Shelldap doesn’t care much about how you search for someone. For example, you could also use any of these searches to find that same entry for Frank: cn=pozner,frank cn=frank.pozner@gatech.edu cn=lpozner3 cn=404-385-1980 cn=4043851980 cn=51980 Notice that for phone numbers, dashes are optional, and you can search on as little as the last 5 digits. Last edited by John M Bryson, 2021-03-30 10:29:45 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

@@ -1,0 +1,48 @@
+Identity and Access Management Home Index Search Log In History Latest Changes How To Access IAM Machines Various notes on requesting a new machine, and then accessing it There have been a number of changes in this area, along with the network and machine rooms, ITAM, etc. so this is a place to document process, known issues, workarounds, How-To, etc. Older methods are going away In the past,we have used powerbroker, ssh, consoles, and other access methods for LINUX servers. This article refers only to Linux types, not Windows or Solaris. -Powerbroker is going away
+-TCP wrapper files  /etc/hosts.allow going away
+-fount.oit access is going away. (fount-dr.oit in BCDC going away?)
+-Older hardware console servers will go away eventually (con-srv's). Maybe not soon.
+-dsview may go away. 
++openmanage will also be added to the mix.    
++jumpman.oit access will replace fount access.
+ So we are going to be using ssh to boxes, jumpman.oit as a jump type box, like fount. Previously we have both host firewalls and network firewalls that affect access. We are going to be using network firewalls with less self service, and local firewalls if they exist will pull rules from network rules. So there will be less self-service on individual hosts, but since in theory all hosts on a single network should be doing like features, you should only have to set it at x.x.x.x/x once. How to get a new machine in CODA Use Cloudbolt to req a box. For iam use these parameters: Group: IAM Environment: CODA IAM Environment Hostname: OS build: rhel7 for prod, or rhel8 for dev NIC1: Use the network data from our IAM Subnets page. Server Size: (small med large) VMresource pool: EIS-PROD Organization name: oit/eis/iam. <– This goes into ITAM and Thycotic,and determines ssh access Environment: Production (or dev or test) Service Name: Identity and Access Management Patch Group: A&B are dev test, C&D are production Password Store: Thycotic All Puppet classifications Login_iam_admin sudoclass iam ? A Cloudbolt user guide is here: PDF 2.There will be a 1-2hr delay here as the box is set up. You will get email. 3.In cloudbolt ensure that domain is iam.gatech.edu and not oit.gatech.edu 4.Set up firewalls 5.Check ITAM 6.Tickets for Cpu upgrades and other things cloudbolt doesnt allow 7.Sanity checks Details on these checks: You will then need to manually do tickets for:
+ -firewall rules to allow your team ssh access or whatever access
+ -firewall rules to allow jumpman.oit and thycotic access (which I think is
+  thycotic.ad.gatech.edu, thycotic2.ad.gatech.edu, thycotic3.ad.gatech.edu )
+  TBD: there is a hostgroup for ai-workstations that includes jumpman.oit, and maybe thats 
+  a way to get basic ssh access going?
+ -to adjust cpu count
+
+You will also want to ensure that ITAM is completed for this new machine. This is self
+service for IAM team, so we can just fix it.
+ -check organization name = oit/eis/iam for our team (cloudbolt may do this part)
+ -add keyword=iam
+ -add IAM app data
+ -add at least 2 app responsible people,so operations knows who to contact
+ -check if in OS provisioning, if so then move to "Service Provisioning"
+
+Check SSH access
+ -ping boxname.iam.gatech.edu
+ -Test access from your workstation,by doing ssh bryson@boxname.iam.gatech.edu
+ -test ssh from jumpman.oit (ssh to jumpman, ssh -v boxname.iam.gatech.edu )
+ -test gtrun from jumpman (ssh to jumpman, kinit, gtrun boxname.iam.gatech.edu)
+ The cloudbolt request form should look like this: How to get a new machine in BCDC Virtual Machine Request Request a new Virtual Machine VM’s can be created for your development and production needs. When submitting a request, please allow for 5-7 business days in order for OIT to fulfill your request. To request multiple VMs with one request, they must be identical except for hostname and IP address/network. What is the name of VM? The name of the VM should be the part of the FQDN before .gatech.edu. 
+So if your VM is to be called "burdell.foo.gatech.edu", the name of your vm would 
+be "burdell.foo". This name cannot be longer than 15 characters (burdell.foo is 11, 
+this includes the dot).
+ The form will look like this: Environment: CODA IAM Environment Virtual Machine: blah.iam.gatech.edu Preferred Contact Method: email External DNS: yes or no Contact Information: johnbryson@gatech.edu Location: bdcd or coda description: Environment: production or test Group: IAM Environment: CODA IAM Environment ChangeLog field: iam Organization Name: oit/eis Audience: iam-admin Desired OU: don’t care but OU=gted,OU=gatech,OU=Solaris-Linux,OU=zz and OU=_GTED seem like possibilities Patch Group: A B C D VM Size: Large Med Small Network: Preferred Hostname: OS build: rhel7 for prod, or rhel8 for dev NIC1: Use the network data from our IAM Subnets VMresource pool: EIS-PROD ChangeLog field: iam OIT-Managed VM: yes Login Entitlement: gtAccountEntitlement= /gt/departmental/oit/a-i/iam /iam-admin-accounts/enabled Grouping: iam How to normally use SSH SSH from workstation often should work. If not, check host groups in fw.noc. A second method is to try ssh from jumpman.oit or older fount-dr.oit.gatech.edu Normally ssh user@jumpman.oit.gatech.edu instead of the older fount or fount-dr.oit A third method is to use gtrun, say if your number of login attempts is exceeded for ssh, or nfs mounts prevent ssh as non-root user, or any other ssh as your username is failing. From jumpman.oit you should be able to kinit bryson@PRISM.GATECH.EDU     (or bryson@AD.GATECH.EDU )
+gtrun inanna Or you could try the thyc_ssh script from your workstation. But is should work from jumpman. This requires you have access to the box in thycotic groups, which requires the box has the right organization name in ITAM.oit.gatech.edu. For IAM that is ‘oit/eis/iam’ Alternate ways Normally, you should be able to ssh to access boxes from jumpman.oit ssh user@inanna.gatech.edu If that fails, try telnet machinename.domain 22 to see if its a firewall rule. We have also found that older boxes need /etc/hosts.allow rules for ssh. inanna and socks.iam have examples of this: ## allow TS hosts
+ALL:     
+         fount.oit.gatech.edu, fount-dr.oit.gatech.edu, \
+        thycotic.ad.gatech.edu, thycotic2.ad.gatech.edu, thycotic3.ad.gatech.edu\
+ Alternate ssh There is also a script call thyc_ssh that you can use from your workstation if you have python3 prereq. Usage is thyc_ssh inanna Troubleshooting when logins fail If those fail here are other factors: -check fw rules allow 22 from thycotic and jumpman.oit fount.oit.gatech.edu
+fount-dr.oit.gatech.edu 
+thycotic.ad.gatech.edu
+thycotic2.ad.gatech.edu
+thycotic3.ad.gatech.edu
+jumpman.oit.gatech.edu
+ -check ITAM “organization name” = oit/eis/iam -check if you have access to the machine in hygiene/thycotic https://hygiene.gatech.edu/ If not, then there may need to be a org name of oit/eis/iam or need to do a ‘move’ on hygiene done as well (see Mark Pratt, Fred Papuga) Vcenter vsphere alternate method If all else fails, most of our IAM machines are virtual machines. So from that gui, you can bring up a console https://vcenter.esx.gatech.edu/ https://vcenter.esx.gatech.edu/ui From there, find your machine, and launch web console, or choose Actions, and find a console that way. You can log in with your normal user account or a root password from Thycotic. BUT be sure to log out or reboot - this console is shared, and others can continue as you, if you stay logged in. Note: The current system build process use organization name to determine where in 
+thycotic to put the secret. If you have problems with older boxes, this may be because
+the older system predates the newer build process.
+ Keywords: fount fount-dr jumpman jumpman.oit ssh thyc_ssh cloudbolt puppet
+ Last edited by John M Bryson, 2021-03-09 16:47:27 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

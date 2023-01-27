@@ -1,0 +1,140 @@
+Identity and Access Management Home Index Search Log In History Latest Changes Email Templates This page will detail each automated email that IAM systems send to either IT administrators or end users. The Subject Lines section is a simple list of subject line used for email templates described in the Templates section. The subject line entries link directly to the appropriate template entry. Paragraphs in these templates are often represented by very long line. Be sure to scroll to the right in whatever template you’re interested in to see the full text. Subject Lines GT Email Address Created Password Expiration Notice for account XXX Password for account XXX has expired Welcome to Email Forwarding for Life Welcome Back to Georgia Tech Templates Source: ducos:/srv/gted_util/email/email-welcome-message.template (2016-04-07 06:04:29) Used in: ducos:/srv/gted_util/email/email-notify-people-of-new-address (2016-04-07 06:04:29) Linked from: ducos:/srv-restore2/gted_util/cron.d/hourly8x5.d/email-notify-people-of-new-address.sh Description: Based on the name of the directory the symlink is in, it appears that this script runs roughly hourly, Monday through Friday, from 08:00 to 17:00. GT Email Address Created From: "Georgia Tech Office of Information Technology" <support@oit.gatech.edu>
+To: "DISPLAY_NAME" <PRIMARY_EMAIL_ADDRESS>
+Subject: GT Email Address Created
+
+Welcome to Georgia Tech!
+
+Your official Georgia Tech email address has been created.
+Your GT Email Address: PRIMARY_EMAIL_ADDRESS
+Delivers Email To: PRIMARY_EMAIL_ADDRESS_DESTINATION
+
+To change where your email is delivered to or to create a customized Georgia Tech email address, please visit PASSPORT (https://passport.gatech.edu). This is the same website where you initially activated your GT Account and where you will change your password and setup your emergency contact information, so you may have already seen these email settings while making those changes.
+
+To find out how to send email as your GT email address or to find out about other IT services on campus, please visit the OIT FAQ website (https://faq.oit.gatech.edu).
+
+NOTE: Please keep in mind that Georgia Tech personnel will NEVER ask for your password information over email or by way of telephone. Please review the article listed below for more information on how you can protect yourself from phishing attacks. https://faq.oit.gatech.edu/content/how-identify-legitimate-website
+
+Thank you! And Go Jackets!
+
+Office of Information Technology
+Phone: 404-385-5555
+Email: support@oit.gatech.edu
+ Source: ducos.iam:/srv/gted_util/mage/password-expiration-notifier (2019-11-21 14:41:23) Used in: Description: Password Expiration Notice for account XXX warning_message=string.Template(
+'''GT Account: "${user}"
+Owner: ${owner}
+Password Expiration Date: ${exptime}
+Password Website: https://passport.gatech.edu
+
+Your password will be expiring soon. Please take a moment and log into
+https://passport.gatech.edu to change your password.
+
+NOTE: Georgia Tech personnel will NEVER ask for your password. For
+information on determining if a site is legitimate, see
+https://faq.oit.gatech.edu/content/how-identify-legitimate-website
+
+Thank you,
+Office of Information Technology
+Phone: 404-385-5555
+Email: support@oit.gatech.edu
+''') Password for account XXX has expired expired_message=string.Template(
+'''GT Account: "${user}"
+Owner: ${owner}
+Password Expiration Date: ${exptime}
+Password Website: https://passport.gatech.edu
+
+Your password has expired. Please take a moment and log into
+https://passport.gatech.edu to change your password.
+
+NOTE: Georgia Tech personnel will NEVER ask for your password. For
+information on determining if a site is legitimate, see
+https://faq.oit.gatech.edu/content/how-identify-legitimate-website
+
+Thank you,
+Office of Information Technology
+Phone: 404-385-5555
+Email: support@oit.gatech.edu
+''') Source: inanna:/usr/local/mage/python/emfl_mailout.py (2009-07-17 16:30:45) Used in: inanna:/usr/local/mage/sbin/emfl_notify (2009-08-21 12:50:58) Description: The emfl_notify script is a change processor in Mage. Welcome to Email Forwarding for Life def Welcome(mail_con,log,aliases,mailboxes):
+  '''Send a welcome to EMFL message to the owner of the given
+  accounts, aliases, and mailboxes.
+
+  mail_con  - A Mailer object (see mailer.py).
+  log       - A Log object (see cp_log.py).
+  aliases   - A sequence of email aliases.
+  mailboxes - A sequence of tuples of the form (account,mailbox) such
+              that the given account may be used to configure
+              forwarding from the given mailbox.
+
+  At least one alias or mailbox must be specified
+  (e.i. len(aliases)+len(mailboxes)>0).'''
+
+  # Our message template is a sequence paragraphs, each of which is
+  # a tuple of the form (wrapping_format,paragraph_text).
+  message=(
+  ('w72','''While our records indicate that you have left Georgia Tech, you are
+  eligible to keep the following email ${alias_count} active:'''),
+
+  (None,'''${address_list}'''),
+
+  ('w72','''${This_alias} may be forwarded to the address of your choice by
+  simply logging into http://passport.gatech.edu and going to the "@gatech.edu
+  Alias" tab.'''),
+
+  ('w72','''Also, the ${password_count} for your ${account_count}
+  will no longer expire, since you will need ${it_them} to manage where your
+  mail is directed.'''),
+
+  ('w72','''For more information or to keep up with future changes and
+  enhancements to this service, please see
+  http://faq.oit.gatech.edu/cgi-bin/submenu?emfl.'''),
+
+  (None,'''Thank you,
+Office of Information Technology'''),
+
+  ('w72','''NOTE: If you need assistance, please contact the OIT Support
+  Center. See http://www.oit.gatech.edu/help.'''))
+
+  _emfl_common('Welcome to Email Forwarding for Life',
+               message,mail_con,log,aliases,mailboxes) Welcome Back to Georgia Tech def WelcomeBack(mail_con,log,aliases,mailboxes):
+  '''Welcome the given user back to Georgia Tech (and away from EMFL).
+
+  mail_con  - A Mailer object (see mailer.py).
+  log       - A Log object (see cp_log.py).
+  aliases   - A sequence of email aliases.
+  mailboxes - A sequence of tuples of the form (account,mailbox) such
+              that the given account may be used to configure
+              forwarding from the given mailbox.
+
+  At least one alias or mailbox must be specified
+  (e.i. len(aliases)+len(mailboxes)>0).'''
+
+  # Our message template is a sequence paragraphs, each of which is
+  # a tuple of the form (wrapping_format,paragraph_text).
+  message=(
+  ("w72",'''Now that you have returned to Georgia Tech, you should be aware
+    that:'''),
+
+  ("w72",'''1. Your GT Account has been re-activated. Your chosen password will
+    expire every 120 days.'''),
+
+  ("w72",'''2. You will need to verify your official e-mail account and its
+  destination address.'''),
+
+  ('w72','''Management of either of the above services can be done through our
+  Personal Account Self-Service Portal. http://passport.gatech.edu'''),
+
+  ('w72','For more information, you may visit the following helpful links:'),
+
+  (None,'''www.oit.gatech.edu/help
+http://faq.oit.gatech.edu/cgi-bin/submenu?account
+http://faq.oit.gatech.edu/cgi-bin/submenu?aliases
+  '''),
+
+  (None,'''Thank you,
+Office of Information Technology'''),
+
+  ('w72','''NOTE: If you need assistance, please contact the OIT Support
+  Center. See http://www.oit.gatech.edu/help.'''))
+
+  _emfl_common('Welcome Back to Georgia Tech',
+               message,mail_con,log,aliases,mailboxes) Source: Used in: Description: Email Subject If the email template content is wider than about 120 characters, be sure to indent that content by 4 spaces, and place it here. Do not use the usual tripple-back-tick or tripple-tilde notation for code blocks. That technique doesn't support horizontal scrolling in this wiki.
+ Last edited by Sherry M Belom, 2020-07-08 09:02:30 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology

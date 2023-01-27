@@ -1,0 +1,37 @@
+Identity and Access Management Home Index Search Log In History Latest Changes Guest Service What is Georgia Tech’s Guest Service? There are different types of guest accounts at Georgia Tech. More types might be created in the future as our needs evolve. The original type of guest is a sponsored guest account. Any Georgia Tech student, staff, and faculty member can sponsor guest accounts. Georgia Tech knows very little about these users. They are the responsibility of the sponsor. Sponsors create and manage guests in Passport . By default, sponsored guest accounts can use Georgia Tech’s VPN service and can register their own guest accounts with 2FA on Passport. A guest is not considered to be an employee or student. A guest does not have a GTID, and so is unable to do many things an employee or student can do. The second type of guest account is a light weight web account, used for a very limited number of services such as the COVID testing Georgia Tech supports at https://mytest.gatech.edu . These accounts do not get put into GTAD and have very restricted access. Access to use this service is not granted to users or applications by default, and must be specifically requested from, discussed with, and approved by IAM. Admins using this service may create multiple accounts that have little access to GT resources, and are based on little information about the end user of the account. Ability to create this type of guest is restricted, and has to be preapproved. Little is known about these users. They are the responsibility of the sponsor. This is done in Passport . Sponsored guest accounts have VPN by default and can add 2FA to themselves by logging into Passport . A guest is not considered to be an employee or student. A guest does not have a GTID, so can not do many things an employee can do. Is not in GTAD and has very restricted access to applications This wiki has more information about this type of guest on our External Web Identities page. Who uses Guests? Any student staff faculty can sponsor a guest account. The type of account needed depends on what sort of access is desired. Architecture Passport is the user interface for Guest management. It is self service. The sponsor is responsible for management of their guest accounts. Accounts are a type of ‘GT Account’ so … Go into Mage and Kerberos as usual. Passport can be used to change passwords. Can have 2fa added Have entitlements that grant access to services Can be seen in IAT.gatech.edu However, some differences between guest accounts and regular GT accounts are: May not have GTID May not be in GTAD, Azure, or many apps Have very restricted access compared to regular GT accounts It is recommended that older appliations like Wand, not be used on these accounts. If an account receives the edupersonscopedaffiliation=guest@gt entitlement, that makes it a member of the tier1-2fa-other GRS role. References I found one article that says VPN for guest is tier1-other (no mention of tier1-2fa-other): https://gatech.service-now.com/home?id=kb_article_view&sysparm_article=KB0026483 https://gatech.service-now.com/home?id=kb_article_view&sysparm_article=KB0026483 Note on VPN and DUO / 2FA Announcement about VPN changes: Daily Digest Follow-Up Message re: Cybersecurity
+Office of Information Technology <oit@gatech.edu>
+Wed 4/6/2022 2:40 PM
+To:csr@lists.gatech.edu <csr@lists.gatech.edu>;Intranet of People <iop@groups.gatech.edu>
+Dear Georgia Tech IT Community: 
+
+
+Today's Daily Digest featured a message regarding cyber threats posed by rising conflicts between
+ Russia and Ukraine, particularly stemming from our nation's support of Ukraine. The Office of
+ Information Technology and Cyber Security has partnered across the IT community to heighten
+ information security through increased patching, backups, and other protection measures on
+ Institute-managed systems, services, and equipment.  
+
+
+In support of this effort, OIT will also be enforcing two-factor authentication when signing into
+ all VPN services (including enterprise and departmental VPNs) starting Tuesday, April 12.  
+ 
+
+Sponsored guest accounts which are using the VPN can be enrolled in two-factor authentication at
+ passport.gatech.edu, via self-service. Additional information can be found in the knowledge
+ article How do I enroll myself (self-enroll) in Two-factor Authentication. 
+
+ 
+Users should not experience any additional change to their VPN services. They will just be
+ prompted to complete two-factor authentication via Duo when accessing VPN after April 12.  
+
+
+If you have any questions regarding this upcoming change, please contact oit@gatech.edu.  
+
+ 
+We realize that the collective work requires the sponsorship and support of our leadership. With
+ this in mind, our CISO Leo Howell has already begun to meet with academic leaders regarding our
+ current situation and plans for mitigating risk. You can also expect additional communications
+ from OIT and Cyber Security regarding progress in this effort.  
+
+ 
+Thank you for your partnership. Keywords guest acccounts vpn 2fa duo tier1-2fa-other tier1-other membershipreport membership ‘guest vpn’ Last edited by Jeff M Clough, 2022-10-27 14:17:10 Short link to this page Emergency Information Legal & Privacy Information Accessibility Accountability Accreditation Employment © 2014 Georgia Institute of Technology
