@@ -3,6 +3,7 @@ package createIndexes;
 import com.opencsv.CSVWriter;
 import searchKeywords.SearchKeyword;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,6 +24,7 @@ public class IndexMain {
 
     static {
         try {
+            createDirectoryIfNotExists(System.getProperty("user.dir") + "/statistics");
             csvWriter = new CSVWriter(new FileWriter(System.getProperty("user.dir") + "/statistics/indexStats.csv", true));
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,12 +40,15 @@ public class IndexMain {
         //twoHundredPageExecutor(createIndex);
         //threeHundredPageExecutor(createIndex);
         //fourHundredPageExecutor(createIndex);
-        fiveHundredPageExecutor(createIndex);
+        //fiveHundredPageExecutor(createIndex);
 
         csvWriter.close();
     }
 
     private static void initial100PagesExecutor(CreateIndex createIndex) throws IOException, InterruptedException {
+        String[] header = {"Analyzer", "Num of Records Indexed" , "Time Taken", "Num of Keywords"};
+        csvWriter.writeNext(header);
+        csvWriter.flush();
         initial100Pages(createIndex, STANDARD_ANALYSER);
         initial100Pages(createIndex, SIMPLE_ANALYSER);
         initial100Pages(createIndex, STOP_ANALYSER);
@@ -51,9 +56,6 @@ public class IndexMain {
     }
 
     private static void initial100Pages(CreateIndex createIndex, String analyser) throws IOException, InterruptedException {
-        String[] header = {"Analyzer", "Num of Records Indexed" , "Time Taken", "Num of Keywords"};
-        csvWriter.writeNext(header);
-        csvWriter.flush();
         startTime = System.currentTimeMillis();
         createIndex.createIndex(analyser, 1, 1);
         recordTimeAndKeywords(analyser, 1, 1);
@@ -154,6 +156,13 @@ public class IndexMain {
         String[] data = {analyser, Long.toString(docsEntered), Integer.toString(duration), Long.toString(numKeywords)};
         csvWriter.writeNext(data);
         csvWriter.flush();
+    }
+
+    public static void createDirectoryIfNotExists(String path) {
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
     }
 
 }
