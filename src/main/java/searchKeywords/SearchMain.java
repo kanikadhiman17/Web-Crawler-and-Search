@@ -14,7 +14,7 @@ public class SearchMain {
 
     public static void main(String[] args) throws IOException, ParseException {
         String keywordSearch = "computer";
-        Integer n =20;
+        Integer n =20; // limiting search answer to 20
 
 //        getTopNKeywords(n, STANDARD_ANALYSER);
 //        getTopNKeywords(n, SIMPLE_ANALYSER);
