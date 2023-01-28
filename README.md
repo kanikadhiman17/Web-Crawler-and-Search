@@ -8,13 +8,13 @@ Language: Java 8+ (`openjdk-18`), IDE: `IntelliJ`
 
 Libraries Used: `Jsoup - 1.11.2` – for web crawling, `Apache Lucene - 7` – for Indexing and Searching, `OpenCSV - 4.4` – for writing the analytics data to CSV. The exact versions are included in `pom.xml`.
 
-Analysers Considered while Indexing:
+Analysers considered while indexing:
 1.	Standard Analyser
 2.	Stop Analyser
 3.	Simple Analyser
 4.	Standard Analyser
 
-Tool for Visualisation: Tableau 
+Tool for Visualisation: `Tableau`
 
 ## Setup: 
 
