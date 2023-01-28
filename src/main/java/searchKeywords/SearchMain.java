@@ -14,17 +14,19 @@ public class SearchMain {
 
     public static void main(String[] args) throws IOException, ParseException {
         String keywordSearch = "computer";
-        Integer n =20; // limiting search answer to 20
+        Integer n = 20;
 
 //        getTopNKeywords(n, STANDARD_ANALYSER);
 //        getTopNKeywords(n, SIMPLE_ANALYSER);
 //        getTopNKeywords(n, STOP_ANALYSER);
 //        getTopNKeywords(n, WHITESPACE_ANALYSER);
 
+        long startTime = System.currentTimeMillis();
         searchKeyword(keywordSearch, STANDARD_ANALYSER);
         searchKeyword(keywordSearch, SIMPLE_ANALYSER);
         searchKeyword(keywordSearch, STOP_ANALYSER);
         searchKeyword(keywordSearch, WHITESPACE_ANALYSER);
+        System.out.println("Time taken to search keyword: " + (System.currentTimeMillis() - startTime) + "ms");
 
 //        getKeywordSize(STANDARD_ANALYSER);
 //        getKeywordSize(SIMPLE_ANALYSER);
