@@ -2,11 +2,11 @@
 This repository is made for Homework 1 for the Advanced Internet Computing, Spring 2023 at Georgia Tech. It involves implementing Web Search using Apache Lucene where the Web Pages are craweled and scraped using Jsoup.
 
 
-Number of web pages crawled: ~1600
+Number of web pages crawled: `1601`
 
-Language: Java 8+ (`openjdk-18`), IDE: IntelliJ
+Language: Java 8+ (`openjdk-18`), IDE: `IntelliJ`
 
-Libraries Used: `Jsoup` – for web crawling, `Apache Lucene` – for Indexing and Searching, `OpenCSV` – for writing the analytics data to CSV
+Libraries Used: `Jsoup - 1.11.2` – for web crawling, `Apache Lucene - 7` – for Indexing and Searching, `OpenCSV - 4.4` – for writing the analytics data to CSV. The exact versions are included in `pom.xml`.
 
 Analysers Considered while Indexing:
 1.	Standard Analyser
