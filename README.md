@@ -24,7 +24,7 @@ Tool for Visualisation: `Tableau`
 2. Create Indexes for Specific Tasks: `IndexMain.java`- The indexes It contains multiple  index creation methods which are custom to the one by one execution required to accomplish the tasks being asked. Note, the executor methods are made so that the homework tasks can be executed separately. 
 > Note: This repository already contains the indexed files for the already crawled files in the step 1. 
 
-3. Search the keywords: `SearchMain.java`- It functionalities like keyword search, total number of keywords stored so far, and print top N keywords, which can be executed one by one to accomplish the tasks being asked.
+3. Search the keywords: `SearchMain.java`- It include functionalities like keyword search, total number of keywords stored so far, and print top N keywords, which can be executed one by one to accomplish the tasks being asked.
 
 
 
