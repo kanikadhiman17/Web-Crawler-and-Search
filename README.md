@@ -1,7 +1,7 @@
 # Web-Crawler-and-Search
 This repository is made for Homework 1 of Advanced Internet Computing, Spring 2023 at Georgia Tech. It involves implementing a Toy Web Search using Apache Lucene where the Web Pages are craweled and scraped using Jsoup, and then indexed for the searching.
 
-## Basic Information
+## Basic Information:
 Number of web pages crawled: `1601`
 
 Language: Java 8+ (`openjdk-18`), IDE: `IntelliJ`
