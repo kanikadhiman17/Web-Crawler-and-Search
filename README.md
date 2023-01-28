@@ -19,10 +19,10 @@ Tool for Visualisation: `Tableau`
 ## Setup: 
 
 1. Run the crawler: `CrawlerMain.java`- Contains the seed URL `cc.gatech.edu ` and depth as `30`. 
-> Note: This repository already contains the crawled files. One can skip this unless more or less number of web pages are to be included with a different seed url. 
+> Note: This repository already contains the crawled files. This step can be skipped unless more or less number of web pages are to be included with a different seed url and depth. 
 
-2. Create Indexes for Specific Tasks: `IndexMain.java`- The indexes It contains multiple  index creation methods which are custom to the one by one execution required to accomplish the tasks being asked. Note, the executor methods are made so that the homework tasks can be executed separately. 
-> Note: This repository already contains the indexed files for the already crawled files in the step 1. 
+2. Create Indexes for Specific Tasks: `IndexMain.java`- It contains multiple index creation methods which that are tailored to the one-by-one execution needed to finish the tasks asked in the homework. Note, there are separate executor methods made for each part. 
+> Note: This repository already contains the indexed files in the `index` folder for the crawled files from the step 1. 
 
 3. Search the keywords: `SearchMain.java`- It include functionalities like keyword search, total number of keywords stored so far, and print top N keywords, which can be executed one by one to accomplish the tasks being asked.
 
